@@ -26,6 +26,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new Dotenv({ systemvars: true })
   ],
   output: {
     path: path.join(__dirname, 'dist'),
