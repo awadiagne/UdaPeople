@@ -292,10 +292,11 @@ jobs:
       - attach_workspace:
           at: ~/
       - install_ansible
+      - install_awscli
       - run:
           name: Install dependencies
           command: |
-            yum install -y tar gzip
+            apt-get install -y tar gzip
       - run:
           name: Deploy backend
           command: |
