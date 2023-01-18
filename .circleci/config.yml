@@ -293,10 +293,12 @@ jobs:
           at: ~/
       - install_ansible
       - install_awscli
+      - install_nodejs
       - run:
           name: Install dependencies
           command: |
-            apt-get install -y tar gzip
+            cd backend
+            npm install
       - run:
           name: Deploy backend
           command: |
