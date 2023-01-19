@@ -1,0 +1,3 @@
+URL01 - GitHub Public link : https://github.com/awadiagne/UdaPeople
+
+URL02 - Public URL for S3 Bucket: http://udapeople-6db089f.s3-website-us-east-1.amazonaws.com/
