@@ -374,9 +374,9 @@ jobs:
             export BLUE_WORKFLOW_ID=$(aws cloudformation \
                         list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                         --no-paginate --output text)
-            echo $BLUE_WORKFLOW_ID | cut -d'-' -f 2 >> ~/BlueWorkflowId.txt
+            WORKFLOW_ID=$BLUE_WORKFLOW_ID | cut -d'-' -f 2 >> ~/BlueWorkflowId.txt
             cat ~/BlueWorkflowId.txt
-            curl https://kvdb.io/3NmzRA5q2KhvgyJdi14TuG/blue_workflow_id -d "${BLUE_WORKFLOW_ID}"
+            curl https://kvdb.io/3NmzRA5q2KhvgyJdi14TuG/blue_workflow_id -d "${WORKFLOW_ID}"
       - run:
           name: Update cloudfront distribution
           command: |
