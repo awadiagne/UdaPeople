@@ -15,9 +15,9 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
+            aws s3 rm s3://udapeople-<< parameters.WORKFLOW_ID >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.WORKFLOW_ID >>
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.WORKFLOW_ID >>
-            aws s3 rm s3://udapeople-<< parameters.WORKFLOW_ID >> --recursive
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -374,7 +374,8 @@ jobs:
             export BLUE_WORKFLOW_ID=$(aws cloudformation \
                         list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                         --no-paginate --output text)
-            echo "Blue Workflow ID: $BLUE_WORKFLOW_ID"
+            echo $BLUE_WORKFLOW_ID | cut -d'-' -f 2 >> ~/BlueWorkflowId.txt
+            cat ~/BlueWorkflowId.txt
             curl https://kvdb.io/3NmzRA5q2KhvgyJdi14TuG/blue_workflow_id -d "${BLUE_WORKFLOW_ID}"
       - run:
           name: Update cloudfront distribution
@@ -407,9 +408,9 @@ jobs:
 
               if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
               then
+                aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
                 aws cloudformation delete-stack --stack-name udapeople-backend-${OldWorkflowID}
                 aws cloudformation delete-stack --stack-name udapeople-frontend-${OldWorkflowID}
-                aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
                 echo '------------------ CLEANUP COMPLETE -----------------'
               else
                 echo '------------------ CLEANUP FAILED -----------------'
