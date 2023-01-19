@@ -34,11 +34,11 @@ In this project, the following topics are covered:
   1. Successful promotion job. [SCREENSHOT08]
   1. Successful cleanup job. [SCREENSHOT09]
   1. Only deploy on pushed to `master` branch. [SCREENSHOT10]
-  1. Provide a screenshot of a graph of your EC2 instance including available memory, available disk space, and CPU usage. [SCREENSHOT11]
-  1. Provide a screenshot of an alert that was sent by Prometheus. [SCREENSHOT12]
-  1. Provide a screenshot showing the evidence of deployed and functioning front-end application in CloudFront (aka, your production front-end). [URL03_SCREENSHOT]
-  1. Provide a screenshot showing the evidence of a healthy backend application. The backend endpoint status should show a healthy response. [URL04_SCREENSHOT]
-  1. Provide a screenshot of your Prometheus server showing UP state [URL05_SCREENSHOT]
+  1. A screenshot of a graph of your EC2 instance including available memory, available disk space, and CPU usage. [SCREENSHOT11]
+  1. A screenshot of an alert that was sent by Prometheus. [SCREENSHOT12]
+  1. A screenshot showing the evidence of deployed and functioning front-end application in CloudFront (aka, your production front-end). [URL03_SCREENSHOT]
+  1. A screenshot showing the evidence of a healthy backend application. The backend endpoint status should show a healthy response. [URL04_SCREENSHOT]
+  1. A screenshot of the Prometheus server showing UP state [URL05_SCREENSHOT]
 
 
 ### Built With
