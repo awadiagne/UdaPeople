@@ -402,18 +402,21 @@ jobs:
         - run:
             name: Delete old stack
             command: |
-              export OldWorkflowID=D=$(curl --insecure https://kvdb.io/3NmzRA5q2KhvgyJdi14TuG/blue_workflow_id)
+              export OldWorkflowID=$(curl --insecure https://kvdb.io/3NmzRA5q2KhvgyJdi14TuG/blue_workflow_id)
               echo OldWorkflowID: "${OldWorkflowID}"
               export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
               echo Stack names: "${STACKS[@]}"
 
-
-              aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
-              aws cloudformation delete-stack --stack-name udapeople-backend-${OldWorkflowID}
-              aws cloudformation delete-stack --stack-name udapeople-frontend-${OldWorkflowID}
-              echo '------------------ CLEANUP COMPLETE -----------------'
-
+              if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
+              then
+                aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
+                aws cloudformation delete-stack --stack-name udapeople-backend-${OldWorkflowID}
+                aws cloudformation delete-stack --stack-name udapeople-frontend-${OldWorkflowID}
+                echo '------------------ CLEANUP COMPLETE -----------------'
+              else
+                echo '------------------ CLEANUP FAILED -----------------'
+              fi
             
 
 workflows:
